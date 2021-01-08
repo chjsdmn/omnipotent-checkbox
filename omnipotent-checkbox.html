@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnipotent Checkbox</title>
+    <style>
+        #region-select{
+            margin: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="region-select">
+        <div class="region">
+            <input type="checkbox" id="all" name="area" value="all">
+            <label for="all">Select all</label>
+        </div>
+        <div class="region">
+            <input type="checkbox" id="south" name="area" value="south">
+            <label for="south">South</label>
+        </div>
+        <div class="region">
+            <input type="checkbox" id="north" name="area" value="north">
+            <label for="north">North</label>
+        </div>
+        <div class="region">
+            <input type="checkbox" id="east" name="area" value="east">
+            <label for="east">East</label>
+        </div>
+        <div class="region">
+            <input type="checkbox" id="west" name="area" value="west">
+            <label for="west">West</label>
+        </div>
+    </div>
+    <p id="text"></p>
+    <script>
+        let p=document.getElementById("text");
+        let regionSelect=document.getElementById("region-select");
+        let all=document.getElementById("all");
+        let east=document.getElementById("east");
+        let west=document.getElementById("west");
+        let north=document.getElementById("north");
+        let south=document.getElementById("south");
+        all.onchange=function(){
+            if(west.checked==true&&east.checked==true&&north.checked==true&&south.checked==true&&all.checked==false){
+                west.checked=false;
+                east.checked=false;
+                north.checked=false;
+                south.checked=false;
+                text.innerHTML="";
+            }
+            else{
+                west.checked=true;
+                east.checked=true;
+                north.checked=true;
+                south.checked=true;
+                text.innerHTML=west.value+" "+east.value+" "+north.value+" "+south.value;
+            }
+        }
+        regionSelect.onchange=function(e){
+            if(e.target.checked==false&&e.target.value!=="all"){
+                all.checked=false;
+                text.innerHTML=text.innerHTML.replace(e.target.value,"");
+            }
+            else if(e.target.checked==true&&e.target.value!=="all"){
+                text.innerHTML+=e.target.value+" ";
+            }
+            if(west.checked==true&&east.checked==true&&north.checked==true&&south.checked==true&&e.target.value!=="all"){
+                all.checked=true;
+            }
+        }    
+    </script>
+</body>
+</html>
